@@ -1,7 +1,5 @@
 import { Body, Controller, Post, Get, Query } from '@nestjs/common';
-import { ApiTags, ApiResponse } from '@nestjs/swagger';
-import { CommonResponseDto } from 'modules/common/dto/common-response.dto';
-import { ErrorResponseDto } from 'modules/common/dto/error-response.dto';
+import { ApiTags } from '@nestjs/swagger';
 import { TwoFaSetupDto } from './dto/2fa-setup.dto';
 import { TwoFaVerifySetupDto } from './dto/2fa-verify-setup.dto';
 import { VerifyTwoFaDto } from './dto/verify-2fa.dto';

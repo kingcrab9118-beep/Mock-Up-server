@@ -7,7 +7,7 @@ import { SpotService } from './spot.service';
 export class SpotController {
   constructor(private readonly spotService: SpotService) {}
 
-  @Get('symbols')
+  @Get('/public/spot/symbols')
   getSymbols() {
     return this.spotService.getSymbols();
   }
@@ -26,9 +26,27 @@ export class SpotController {
   modifyOrder(@Body() dto: any) {
     return this.spotService.modifyOrder(dto);
   }
-
+  
   @Get('order/info')
   getOrderInfo(@Query('orderId') orderId: string) {
     return this.spotService.getOrderInfo(orderId);
+  }
+
+    // /spot/orders
+  @Get('orders')
+  getOpenOrders(@Query('symbol') symbol?: string) {
+    return this.spotService.getOpenOrders(symbol);
+  }
+
+  // /spot/order/fills
+  @Get('order/fills')
+  getOrderFills(@Query('symbol') symbol?: string) {
+    return this.spotService.getOrderFills(symbol);
+  }
+
+  // /spot/order/history
+  @Get('order/history')
+  getOrderHistory(@Query('symbol') symbol?: string) {
+    return this.spotService.getOrderHistory(symbol);
   }
 }

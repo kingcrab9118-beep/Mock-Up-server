@@ -69,7 +69,7 @@ export class AccountService {
   }
 
   getProfile(): { code: number; message: string; data: any } | ErrorResponseDto {
-    // 임의의 전화번호, 텔레그램ID, 이메일, Oauth 등 생성
+  // Generate random phone number, Telegram ID, email, Oauth, etc.
     const randomDigits = (len: number) => Array.from({length: len}, () => Math.floor(Math.random() * 10)).join('');
     const randomPhone = '+1' + randomDigits(10);
     const randomTelegram = 'tg_' + randomDigits(8);

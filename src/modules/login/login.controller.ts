@@ -34,98 +34,53 @@ export class LoginController {
     return this.loginService.loginWithPhone(dto);
   }
 
-  // 5. 휴대폰 인증
+  // 5. Phone verification
   @Post('phone/verify')
   @ApiResponse({ status: 200, description: 'Login successful', schema: { example: { code: 0, message: 'Verification email sent. Please check your inbox.', data: { isRequire2fa: true, accessToken: 'string', refreshToken: 'string' } } } })
   @ApiResponse({ status: 400, description: 'Invalid or expired OTP', type: ErrorResponseDto })
   async verifyPhone(@Body() dto: LoginPhoneVerifyDto): Promise<CommonResponseDto | ErrorResponseDto> {
-    if (dto.phone === '+1234567890' && dto.otp === '482193') {
-      return {
-        code: 0,
-        message: 'Verification email sent. Please check your inbox.',
-        data: {
-          isRequire2fa: true,
-          accessToken: 'string',
-          refreshToken: 'string'
-        }
-      };
-    } else {
-      return {
-        code: 'INVALID_INPUT',
-        message: 'Error Message'
-      };
-    }
+    return this.loginService.verifyPhone(dto);
   }
 
-  // 6. Passkey 로그인
+  // 6. Passkey login
   @Post('passkey')
   @ApiResponse({ status: 200, description: 'OK' })
   async passkeyLogin(): Promise<{ code: number; message: string }> {
-    return {
-      code: 0,
-      message: 'Passkey login initiated.'
-    };
+    return this.loginService.passkeyLogin();
   }
 
-  // 7. Passkey 인증
+  // 7. Passkey verification
   @Post('passkey/verify')
   @ApiResponse({ status: 200, description: 'Login successful', schema: { example: { code: 0, message: 'Success', data: { accessToken: 'string', refreshToken: 'string' } } } })
   async passkeyVerify(): Promise<{ code: number; message: string; data: { accessToken: string; refreshToken: string } }> {
-    return {
-      code: 0,
-      message: 'Success',
-      data: {
-        accessToken: 'string',
-        refreshToken: 'string'
-      }
-    };
+    return this.loginService.passkeyVerify();
   }
 
-  // 8. Telegram 로그인
+  // 8. Telegram login
   @Post('telegram')
   @ApiResponse({ status: 200, description: 'OK' })
   async telegramLogin(): Promise<{ code: number; message: string }> {
-    return {
-      code: 0,
-      message: 'Telegram login initiated.'
-    };
+    return this.loginService.telegramLogin();
   }
 
-  // 9. Telegram 인증
+  // 9. Telegram verification
   @Post('telegram/verify')
   @ApiResponse({ status: 200, description: 'Login successful', schema: { example: { code: 0, message: 'Success', data: { accessToken: 'string', refreshToken: 'string' } } } })
   async telegramVerify(): Promise<{ code: number; message: string; data: { accessToken: string; refreshToken: string } }> {
-    return {
-      code: 0,
-      message: 'Success',
-      data: {
-        accessToken: 'string',
-        refreshToken: 'string'
-      }
-    };
+    return this.loginService.telegramVerify();
   }
 
-  // 10. Metamask 로그인
+  // 10. Metamask login
   @Post('metamask')
   @ApiResponse({ status: 200, description: 'OK' })
   async metamaskLogin(): Promise<{ code: number; message: string }> {
-    return {
-      code: 0,
-      message: 'Metamask login initiated.'
-    };
+    return this.loginService.metamaskLogin();
   }
 
-  // 11. Metamask 인증
+  // 11. Metamask verification
   @Post('metamask/verify')
   @ApiResponse({ status: 200, description: 'Login successful', schema: { example: { code: 0, message: 'Success', data: { accessToken: 'string', refreshToken: 'string' } } } })
   async metamaskVerify(): Promise<{ code: number; message: string; data: { accessToken: string; refreshToken: string } }> {
-    return {
-      code: 0,
-      message: 'Success',
-      data: {
-        accessToken: 'string',
-        refreshToken: 'string'
-      }
-    };
+    return this.loginService.metamaskVerify();
   }
 }

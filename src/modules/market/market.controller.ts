@@ -1,8 +1,5 @@
-import { Controller, Get, Post, Query, Body } from '@nestjs/common';
+import { Controller, Get, Query } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { TickerInfoDto } from './dto/ticker-info.dto';
-import { OrderBookDto } from './dto/orderbook.dto';
-import { KlineDto } from './dto/kline.dto';
 import { MarketService } from './market.service';
 
 @ApiTags('Market')

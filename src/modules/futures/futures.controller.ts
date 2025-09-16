@@ -1,10 +1,6 @@
 import { Controller, Get, Post, Query, Body } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { FutureSymbolInfoDto } from './dto/future-symbol-info.dto';
 import { FutureOrderRequestDto } from './dto/future-order-request.dto';
-import { FutureOrderInfoResponseDto } from './dto/future-order-info-response.dto';
-import { FuturePositionInfoResponseDto } from './dto/future-position-info-response.dto';
-import { FuturePositionHistoryInfoResponseDto } from './dto/future-position-history-info-response.dto';
 import { FuturesService } from './futures.service';
 
 @ApiTags('Futures')
@@ -17,9 +13,30 @@ export class FuturesController {
     return this.futuresService.getSymbols();
   }
 
+  // /future/setPositionMode
+  @Get('setPositionMode')
+  setPositionMode(@Query('mode') mode: string) {
+    // mode: hedge, oneWay
+    return { newMode: mode };
+  }
+
   @Post('order')
   placeOrder(@Body() dto: FutureOrderRequestDto) {
     return this.futuresService.placeOrder(dto);
+  }
+
+  // /future/orderCancel
+  @Post('orderCancel')
+  orderCancel(@Body() dto: any) {
+    // dto: { orderId: string }
+    return { result: 'cancelled', orderId: dto.orderId };
+  }
+
+  // /future/orderModify
+  @Post('orderModify')
+  orderModify(@Body() dto: any) {
+    // dto: { orderId: string, price: string, size: string, ... }
+    return { result: 'modified', orderId: dto.orderId };
   }
 
   @Get('orderInfo')

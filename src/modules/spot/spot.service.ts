@@ -8,6 +8,85 @@ import { SpotOrderInfoResponseDto } from './dto/spot-order-info-response.dto';
 
 @Injectable()
 export class SpotService {
+  // /spot/orders
+  getOpenOrders(symbol?: string) {
+    // mock open orders
+    return [this.getOrderInfo('open-' + (symbol || 'BTCUSDT'))];
+  }
+
+  // /spot/order/fills
+  getOrderFills(symbol?: string) {
+    // mock filled orders
+    return [
+      {
+        symbol: symbol || 'BTCUSDT',
+        orderId: 'order-12345',
+        tradeId: 'trade-67890',
+        orderType: 'limit',
+        side: 'buy',
+        price: (Math.random() * 1000 + 27000).toFixed(2),
+        baseVolume: (Math.random() * 2).toFixed(4),
+        quoteVolume: (Math.random() * 1000 + 27000).toFixed(2),
+        feeCurrency: 'USDT',
+        fee: (Math.random() * 0.2).toFixed(4),
+        status: 'filled',
+        cTime: new Date().toISOString(),
+        uTime: new Date().toISOString()
+      }
+    ];
+  }
+
+  // /spot/order/history
+  getOrderHistory(symbol?: string) {
+    // mock order history
+    return [this.getOrderInfo('history-' + (symbol || 'BTCUSDT'))];
+  }
+
+  // /public/spot/ticker
+  getSpotTicker(symbol: string) {
+    return {
+      symbol,
+      price: (Math.random() * 1000 + 27000).toFixed(2),
+      change: (Math.random() * 5 - 2.5).toFixed(2),
+      volume: (Math.random() * 2000).toFixed(0),
+      quoteVolume: (Math.random() * 2000).toFixed(0),
+      high: (Math.random() * 1000 + 27000).toFixed(2),
+      low: (Math.random() * 1000 + 27000).toFixed(2)
+    };
+  }
+
+  // /public/spot/orderbook
+  getSpotOrderBook(symbol: string) {
+    const rand = () => (Math.random() * 1000 + 27000).toFixed(2);
+    const randSize = () => (Math.random() * 2).toFixed(2);
+    return {
+      symbol,
+      bids: [
+        { price: rand(), size: randSize() },
+        { price: rand(), size: randSize() }
+      ],
+      asks: [
+        { price: rand(), size: randSize() },
+        { price: rand(), size: randSize() }
+      ]
+    };
+  }
+
+  // /public/spot/klines
+  getSpotKlines(query: any) {
+    // mock kline data
+    return [
+      {
+        openTime: new Date().toISOString(),
+        open: (Math.random() * 1000 + 27000).toFixed(2),
+        high: (Math.random() * 1000 + 27000).toFixed(2),
+        low: (Math.random() * 1000 + 27000).toFixed(2),
+        close: (Math.random() * 1000 + 27000).toFixed(2),
+        volume: (Math.random() * 10).toFixed(2),
+        closeTime: new Date().toISOString()
+      }
+    ];
+  }
   getSymbols(): SpotSymbolInfoDto[] {
     return [
       {

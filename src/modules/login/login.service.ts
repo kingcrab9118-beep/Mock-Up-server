@@ -3,6 +3,7 @@ import { LoginEmailDto } from './dto/login-email.dto';
 import { VerifyLoginEmailDto } from './dto/login-email-verify.dto';
 import { Login2faVerifyDto } from './dto/login-2fa-verify.dto';
 import { LoginPhoneDto } from './dto/login-phone.dto';
+import { LoginPhoneVerifyDto } from './dto/login-phone-verify.dto';
 import { CommonResponseDto } from 'modules/common/dto/common-response.dto';
 import { ErrorResponseDto } from 'modules/common/dto/error-response.dto';
 
@@ -85,5 +86,78 @@ export class LoginService {
         message: 'Error Message'
       };
     }
+  }
+
+  verifyPhone(dto: LoginPhoneVerifyDto): CommonResponseDto | ErrorResponseDto {
+    if (dto.phone === '+1234567890' && dto.otp === '482193') {
+      return {
+        code: 0,
+        message: 'Verification email sent. Please check your inbox.',
+        data: {
+          isRequire2fa: true,
+          accessToken: 'string',
+          refreshToken: 'string'
+        }
+      };
+    } else {
+      return {
+        code: 'INVALID_INPUT',
+        message: 'Error Message'
+      };
+    }
+  }
+
+  passkeyLogin(): { code: number; message: string } {
+    return {
+      code: 0,
+      message: 'Passkey login initiated.'
+    };
+  }
+
+  passkeyVerify(): { code: number; message: string; data: { accessToken: string; refreshToken: string } } {
+    return {
+      code: 0,
+      message: 'Success',
+      data: {
+        accessToken: 'string',
+        refreshToken: 'string'
+      }
+    };
+  }
+
+  telegramLogin(): { code: number; message: string } {
+    return {
+      code: 0,
+      message: 'Telegram login initiated.'
+    };
+  }
+
+  telegramVerify(): { code: number; message: string; data: { accessToken: string; refreshToken: string } } {
+    return {
+      code: 0,
+      message: 'Success',
+      data: {
+        accessToken: 'string',
+        refreshToken: 'string'
+      }
+    };
+  }
+
+  metamaskLogin(): { code: number; message: string } {
+    return {
+      code: 0,
+      message: 'Metamask login initiated.'
+    };
+  }
+
+  metamaskVerify(): { code: number; message: string; data: { accessToken: string; refreshToken: string } } {
+    return {
+      code: 0,
+      message: 'Success',
+      data: {
+        accessToken: 'string',
+        refreshToken: 'string'
+      }
+    };
   }
 }
