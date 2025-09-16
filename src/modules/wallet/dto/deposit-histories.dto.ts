@@ -1,4 +1,4 @@
-export class DepositHistorysQueryDto {
+export class DeposithistoriesQueryDto {
   currency?: string;
   limit?: number;
   offset?: number;
@@ -17,7 +17,7 @@ export class DepositHistoryItemDto {
   confirmedAt?: string | null;
 }
 
-export class DepositHistorysResponseDto {
+export class DeposithistoriesResponseDto {
   code: boolean;
   message: string;
   data: {

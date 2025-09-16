@@ -17,9 +17,9 @@ export class WalletController {
     return this.walletService.getDepositAddress(query);
   }
 
-  @Get('deposit/historys')
-  getDepositHistorys(@Query() query: any) {
-    return this.walletService.getDepositHistorys(query);
+  @Get('deposit/histories')
+  getDeposithistories(@Query() query: any) {
+    return this.walletService.getDeposithistories(query);
   }
 
   @Post('withdraw')
@@ -32,9 +32,9 @@ export class WalletController {
     return this.walletService.verifyWithdraw(dto);
   }
 
-  @Get('withdraw/historys')
-  getWithdrawHistorys(@Query() query: any) {
-    return this.walletService.getWithdrawHistorys(query);
+  @Get('withdraw/histories')
+  getWithdrawhistories(@Query() query: any) {
+    return this.walletService.getWithdrawhistories(query);
   }
 
   @Post('transfer')

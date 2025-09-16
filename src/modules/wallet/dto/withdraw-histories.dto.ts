@@ -1,4 +1,4 @@
-export class WithdrawHistorysQueryDto {
+export class WithdrawhistoriesQueryDto {
   currency?: string;
   limit?: number;
   offset?: number;
@@ -18,7 +18,7 @@ export class WithdrawHistoryItemDto {
   cancelledAt?: string | null;
 }
 
-export class WithdrawHistorysResponseDto {
+export class WithdrawhistoriesResponseDto {
   code: number;
   message: string;
   balance: number;

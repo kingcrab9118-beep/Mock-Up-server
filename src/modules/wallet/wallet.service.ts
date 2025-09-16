@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { BalanceQueryDto, BalanceResponseDto } from './dto/balance.dto';
 import { DepositAddressQueryDto, DepositAddressResponseDto } from './dto/deposit-address.dto';
-import { DepositHistorysQueryDto, DepositHistorysResponseDto } from './dto/deposit-historys.dto';
+import { DeposithistoriesQueryDto, DeposithistoriesResponseDto } from './dto/deposit-histories.dto';
 import { WithdrawRequestDto, WithdrawResponseDto } from './dto/withdraw.dto';
 import { WithdrawVerifyRequestDto, WithdrawVerifyResponseDto } from './dto/withdraw-verify.dto';
-import { WithdrawHistorysQueryDto, WithdrawHistorysResponseDto } from './dto/withdraw-historys.dto';
+import { WithdrawhistoriesQueryDto, WithdrawhistoriesResponseDto } from './dto/withdraw-histories.dto';
 import { TransferRequestDto, TransferResponseDto } from './dto/transfer.dto';
 
 @Injectable()
@@ -42,12 +42,12 @@ export class WalletService {
     };
   }
 
-  getDepositHistorys(query: DepositHistorysQueryDto): DepositHistorysResponseDto {
+  getDeposithistories(query: DeposithistoriesQueryDto): DeposithistoriesResponseDto {
     const randHex = () => '0x' + Array.from({length: 16}, () => Math.floor(Math.random() * 16).toString(16)).join('');
     const randTx = () => 'tx' + Math.floor(Math.random() * 100000);
     return {
       code: true,
-      message: 'Deposit historys',
+      message: 'Deposit histories',
       data: {
         recentDeposits: [
           {
@@ -86,12 +86,12 @@ export class WalletService {
     };
   }
 
-  getWithdrawHistorys(query: WithdrawHistorysQueryDto): WithdrawHistorysResponseDto {
+  getWithdrawhistories(query: WithdrawhistoriesQueryDto): WithdrawhistoriesResponseDto {
     const randHex = () => '0x' + Array.from({length: 16}, () => Math.floor(Math.random() * 16).toString(16)).join('');
     const randTx = () => 'tx' + Math.floor(Math.random() * 100000);
     return {
       code: 0,
-      message: 'Withdrawal historys',
+      message: 'Withdrawal histories',
       balance: parseFloat((Math.random() * 10000).toFixed(2)),
       recentWithdrawals: [
         {
