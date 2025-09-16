@@ -11,6 +11,13 @@ async function bootstrap() {
     .setDescription('Mock-up server API documentation')
     .setVersion('1.0')
     .addTag('Register')
+    .addTag('Login')
+    .addTag('Account Management')
+    .addTag('Wallet APIs')
+    .addTag('Spot')
+    .addTag('Market')
+    .addTag('Futures')
+    .addTag('WebSocket')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);

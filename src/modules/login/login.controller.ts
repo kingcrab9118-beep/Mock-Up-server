@@ -7,147 +7,36 @@ import { VerifyLoginEmailDto } from './dto/login-email-verify.dto';
 import { Login2faVerifyDto } from './dto/login-2fa-verify.dto';
 import { CommonResponseDto } from 'modules/common/dto/common-response.dto';
 import { ErrorResponseDto } from 'modules/common/dto/error-response.dto';
+import { LoginService } from './login.service';
 
 @ApiTags('Login')
 @Controller('login')
 export class LoginController {
-  // email
+  constructor(private readonly loginService: LoginService) {}
+
   @Post('email')
-  @ApiResponse({ status: 200, description: 'Login successful, verification may be required', type: CommonResponseDto })
-  @ApiResponse({ status: 400, description: 'Invalid credentials', type: ErrorResponseDto })
-  async loginWithEmail(@Body() dto: LoginEmailDto): Promise<CommonResponseDto | ErrorResponseDto> {
-    if (dto.email === 'user@example.com' && dto.password === 'Str0ngP@ssword!') {
-      return {
-        code: 0,
-        message: 'Verification email sent. Please check your inbox.',
-        data: {
-          userId: '1234-1234-1234-1234'
-        }
-      };
-    } else {
-      return {
-        code: 'INVALID_INPUT',
-        message: 'Error Message'
-      };
-    }
+  async loginWithEmail(@Body() dto: LoginEmailDto) {
+    return this.loginService.loginWithEmail(dto);
   }
-  // email/verify
+
   @Post('email/verify')
-  @ApiResponse({
-    status: 200,
-    description: 'email verify success response',
-    schema: {
-      example: {
-        code: 0,
-        message: 'Success',
-        data: {
-          isRequire2fa: true,
-          accessToken: 'string',
-          refreshToken: 'string'
-        }
-      }
-    }
-  })
-  @ApiResponse({ status: 400, description: 'Invalid or expired code', type: ErrorResponseDto })
-  async verifyLoginEmail(@Body() dto: VerifyLoginEmailDto): Promise<CommonResponseDto | ErrorResponseDto> {
-    if (dto.email === 'user@example.com' && dto.verificationCode === '482193') {
-      return {
-        code: 0,
-        message: 'Success',
-        data: {
-          isRequire2fa: true,
-          accessToken: 'string',
-          refreshToken: 'string'
-        }
-      };
-    } else {
-      return {
-        code: 'INVALID_INPUT',
-        message: 'Error Message'
-      };
-    }
+  async verifyLoginEmail(@Body() dto: VerifyLoginEmailDto) {
+    return this.loginService.verifyLoginEmail(dto);
   }
-  // 2fa-verify
+
   @Post('2fa-verify')
-  @ApiResponse({
-    status: 200,
-    description: '2fa verify success response',
-    schema: {
-      example: {
-        code: 0,
-        message: 'Success',
-        data: {
-          accessToken: 'string',
-          refreshToken: 'string'
-        }
-      }
-    }
-  })
-  @ApiResponse({ status: 400, description: 'Invalid or expired code', type: ErrorResponseDto })
-  async verify2fa(@Body() dto: Login2faVerifyDto): Promise<CommonResponseDto | ErrorResponseDto> {
-    if (dto.totp === '482193') {
-      return {
-        code: 0,
-        message: 'Success',
-        data: {
-          accessToken: 'string',
-          refreshToken: 'string'
-        }
-      };
-    } else {
-      return {
-        code: 'INVALID_INPUT',
-        message: 'Error Message'
-      };
-    }
+  async verify2fa(@Body() dto: Login2faVerifyDto) {
+    return this.loginService.verify2fa(dto);
   }
-  // phone
+
   @Post('phone')
-  @ApiResponse({
-    status: 200,
-    description: 'OTP sent successfully',
-    schema: {
-      example: {
-        code: 0,
-        message: 'Verification SMS sent. Please check your phone.',
-        data: { userId: '1234-1234-1234-1234' }
-      }
-    }
-  })
-  @ApiResponse({ status: 400, description: 'Invalid phone number', type: ErrorResponseDto })
-  async loginWithPhone(@Body() dto: LoginPhoneDto): Promise<CommonResponseDto | ErrorResponseDto> {
-    if (dto.phone === '+1234567890' && dto.password === 'Str0ngP@ssword!') {
-      return {
-        code: 0,
-        message: 'Verification SMS sent. Please check your phone.',
-        data: {
-          userId: '1234-1234-1234-1234'
-        }
-      };
-    } else {
-      return {
-        code: 'INVALID_INPUT',
-        message: 'Error Message'
-      };
-    }
+  async loginWithPhone(@Body() dto: LoginPhoneDto) {
+    return this.loginService.loginWithPhone(dto);
   }
-  // phone/verify
+
+  // 5. 휴대폰 인증
   @Post('phone/verify')
-  @ApiResponse({
-    status: 200,
-    description: 'Login successful',
-    schema: {
-      example: {
-        code: 0,
-        message: 'Verification email sent. Please check your inbox.',
-        data: {
-          isRequire2fa: true,
-          accessToken: 'string',
-          refreshToken: 'string'
-        }
-      }
-    }
-  })
+  @ApiResponse({ status: 200, description: 'Login successful', schema: { example: { code: 0, message: 'Verification email sent. Please check your inbox.', data: { isRequire2fa: true, accessToken: 'string', refreshToken: 'string' } } } })
   @ApiResponse({ status: 400, description: 'Invalid or expired OTP', type: ErrorResponseDto })
   async verifyPhone(@Body() dto: LoginPhoneVerifyDto): Promise<CommonResponseDto | ErrorResponseDto> {
     if (dto.phone === '+1234567890' && dto.otp === '482193') {
@@ -167,7 +56,8 @@ export class LoginController {
       };
     }
   }
-  // passkey
+
+  // 6. Passkey 로그인
   @Post('passkey')
   @ApiResponse({ status: 200, description: 'OK' })
   async passkeyLogin(): Promise<{ code: number; message: string }> {
@@ -176,7 +66,8 @@ export class LoginController {
       message: 'Passkey login initiated.'
     };
   }
-  // passkey/verify
+
+  // 7. Passkey 인증
   @Post('passkey/verify')
   @ApiResponse({ status: 200, description: 'Login successful', schema: { example: { code: 0, message: 'Success', data: { accessToken: 'string', refreshToken: 'string' } } } })
   async passkeyVerify(): Promise<{ code: number; message: string; data: { accessToken: string; refreshToken: string } }> {
@@ -189,7 +80,8 @@ export class LoginController {
       }
     };
   }
-  // telegram
+
+  // 8. Telegram 로그인
   @Post('telegram')
   @ApiResponse({ status: 200, description: 'OK' })
   async telegramLogin(): Promise<{ code: number; message: string }> {
@@ -198,7 +90,8 @@ export class LoginController {
       message: 'Telegram login initiated.'
     };
   }
-  // telegram/verify
+
+  // 9. Telegram 인증
   @Post('telegram/verify')
   @ApiResponse({ status: 200, description: 'Login successful', schema: { example: { code: 0, message: 'Success', data: { accessToken: 'string', refreshToken: 'string' } } } })
   async telegramVerify(): Promise<{ code: number; message: string; data: { accessToken: string; refreshToken: string } }> {
@@ -211,7 +104,8 @@ export class LoginController {
       }
     };
   }
-  // metamask
+
+  // 10. Metamask 로그인
   @Post('metamask')
   @ApiResponse({ status: 200, description: 'OK' })
   async metamaskLogin(): Promise<{ code: number; message: string }> {
@@ -220,7 +114,8 @@ export class LoginController {
       message: 'Metamask login initiated.'
     };
   }
-  // metamask/verify
+
+  // 11. Metamask 인증
   @Post('metamask/verify')
   @ApiResponse({ status: 200, description: 'Login successful', schema: { example: { code: 0, message: 'Success', data: { accessToken: 'string', refreshToken: 'string' } } } })
   async metamaskVerify(): Promise<{ code: number; message: string; data: { accessToken: string; refreshToken: string } }> {

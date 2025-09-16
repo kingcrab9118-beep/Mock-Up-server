@@ -1,0 +1,34 @@
+import { Controller, Get, Post, Query, Body } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
+import { SpotService } from './spot.service';
+
+@ApiTags('Spot')
+@Controller('spot')
+export class SpotController {
+  constructor(private readonly spotService: SpotService) {}
+
+  @Get('symbols')
+  getSymbols() {
+    return this.spotService.getSymbols();
+  }
+
+  @Post('order')
+  placeOrder(@Body() dto: any) {
+    return this.spotService.placeOrder(dto);
+  }
+
+  @Post('order/cancel')
+  cancelOrder(@Body() dto: any) {
+    return this.spotService.cancelOrder(dto);
+  }
+
+  @Post('order/modify')
+  modifyOrder(@Body() dto: any) {
+    return this.spotService.modifyOrder(dto);
+  }
+
+  @Get('order/info')
+  getOrderInfo(@Query('orderId') orderId: string) {
+    return this.spotService.getOrderInfo(orderId);
+  }
+}
