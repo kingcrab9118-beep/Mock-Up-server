@@ -20,7 +20,9 @@ export class LoginController {
       return {
         code: 0,
         message: 'Verification email sent. Please check your inbox.',
-        data: { userId: '1234-1234-1234-1234' }
+        data: {
+          userId: '1234-1234-1234-1234'
+        }
       };
     } else {
       return {
@@ -118,7 +120,9 @@ export class LoginController {
       return {
         code: 0,
         message: 'Verification SMS sent. Please check your phone.',
-        data: { userId: '1234-1234-1234-1234' }
+        data: {
+          userId: '1234-1234-1234-1234'
+        }
       };
     } else {
       return {
@@ -167,36 +171,66 @@ export class LoginController {
   @Post('passkey')
   @ApiResponse({ status: 200, description: 'OK' })
   async passkeyLogin(): Promise<{ code: number; message: string }> {
-    return { code: 0, message: 'Passkey login initiated.' };
+    return {
+      code: 0,
+      message: 'Passkey login initiated.'
+    };
   }
   // passkey/verify
   @Post('passkey/verify')
   @ApiResponse({ status: 200, description: 'Login successful', schema: { example: { code: 0, message: 'Success', data: { accessToken: 'string', refreshToken: 'string' } } } })
   async passkeyVerify(): Promise<{ code: number; message: string; data: { accessToken: string; refreshToken: string } }> {
-    return { code: 0, message: 'Success', data: { accessToken: 'string', refreshToken: 'string' } };
+    return {
+      code: 0,
+      message: 'Success',
+      data: {
+        accessToken: 'string',
+        refreshToken: 'string'
+      }
+    };
   }
   // telegram
   @Post('telegram')
   @ApiResponse({ status: 200, description: 'OK' })
   async telegramLogin(): Promise<{ code: number; message: string }> {
-    return { code: 0, message: 'Telegram login initiated.' };
+    return {
+      code: 0,
+      message: 'Telegram login initiated.'
+    };
   }
   // telegram/verify
   @Post('telegram/verify')
   @ApiResponse({ status: 200, description: 'Login successful', schema: { example: { code: 0, message: 'Success', data: { accessToken: 'string', refreshToken: 'string' } } } })
   async telegramVerify(): Promise<{ code: number; message: string; data: { accessToken: string; refreshToken: string } }> {
-    return { code: 0, message: 'Success', data: { accessToken: 'string', refreshToken: 'string' } };
+    return {
+      code: 0,
+      message: 'Success',
+      data: {
+        accessToken: 'string',
+        refreshToken: 'string'
+      }
+    };
   }
   // metamask
   @Post('metamask')
   @ApiResponse({ status: 200, description: 'OK' })
   async metamaskLogin(): Promise<{ code: number; message: string }> {
-    return { code: 0, message: 'Metamask login initiated.' };
+    return {
+      code: 0,
+      message: 'Metamask login initiated.'
+    };
   }
   // metamask/verify
   @Post('metamask/verify')
   @ApiResponse({ status: 200, description: 'Login successful', schema: { example: { code: 0, message: 'Success', data: { accessToken: 'string', refreshToken: 'string' } } } })
   async metamaskVerify(): Promise<{ code: number; message: string; data: { accessToken: string; refreshToken: string } }> {
-    return { code: 0, message: 'Success', data: { accessToken: 'string', refreshToken: 'string' } };
+    return {
+      code: 0,
+      message: 'Success',
+      data: {
+        accessToken: 'string',
+        refreshToken: 'string'
+      }
+    };
   }
 }
