@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { SpotSymbolInfoDto } from './dto/spot-symbol-info.dto';
+import { SpotSymbolInfoDto } from '../market/dto/spot-symbol-info.dto';
 import { SpotOrderRequestDto } from './dto/spot-order-request.dto';
 import { OrderResponseDto } from './dto/order-response.dto';
 import { CancelOrderRequestDto } from './dto/cancel-order-request.dto';
@@ -84,20 +84,6 @@ export class SpotService {
         close: (Math.random() * 1000 + 27000).toFixed(2),
         volume: (Math.random() * 10).toFixed(2),
         closeTime: new Date().toISOString()
-      }
-    ];
-  }
-  getSymbols(): SpotSymbolInfoDto[] {
-    return [
-      {
-        symbol: 'BTCUSDT',
-        baseCurrency: 'BTC',
-        quoteCurrency: 'USDT',
-        minOrderSize: '0.001',
-        maxOrderSize: '100',
-        pricePrecision: '2',
-        sizePrecision: '4',
-        status: 'active'
       }
     ];
   }

@@ -7,6 +7,11 @@ import { MarketService } from './market.service';
 export class MarketController {
   constructor(private readonly marketService: MarketService) {}
 
+  @Get('/spot/symbols')
+  getSymbols() {
+    return this.marketService.getSymbols();
+  }
+
   @Get('spot/ticker')
   getSpotTicker(@Query('symbol') symbol: string) {
     return this.marketService.getSpotTicker(symbol);

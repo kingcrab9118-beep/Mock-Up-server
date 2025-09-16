@@ -2,9 +2,24 @@ import { Injectable } from '@nestjs/common';
 import { TickerInfoDto } from './dto/ticker-info.dto';
 import { OrderBookDto } from './dto/orderbook.dto';
 import { KlineDto } from './dto/kline.dto';
+import { SpotSymbolInfoDto } from './dto/spot-symbol-info.dto';
 
 @Injectable()
 export class MarketService {
+    getSymbols(): SpotSymbolInfoDto[] {
+    return [
+        {
+        symbol: 'BTCUSDT',
+        baseCurrency: 'BTC',
+        quoteCurrency: 'USDT',
+        minOrderSize: '0.001',
+        maxOrderSize: '100',
+        pricePrecision: '2',
+        sizePrecision: '4',
+        status: 'active'
+        }
+    ];
+    }
   getSpotTicker(symbol: string): TickerInfoDto {
     const rand = () => (Math.random() * 1000 + 27000).toFixed(2);
     return {

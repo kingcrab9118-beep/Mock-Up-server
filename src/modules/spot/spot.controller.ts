@@ -7,11 +7,6 @@ import { SpotService } from './spot.service';
 export class SpotController {
   constructor(private readonly spotService: SpotService) {}
 
-  @Get('/public/spot/symbols')
-  getSymbols() {
-    return this.spotService.getSymbols();
-  }
-
   @Post('order')
   placeOrder(@Body() dto: any) {
     return this.spotService.placeOrder(dto);
