@@ -29,14 +29,14 @@ export class FuturesController {
   @Post('orderCancel')
   orderCancel(@Body() dto: any) {
     // dto: { orderId: string }
-    return { result: 'cancelled', orderId: dto.orderId };
+    return { result: 'cancelled' };
   }
 
   // /future/orderModify
   @Post('orderModify')
   orderModify(@Body() dto: any) {
     // dto: { orderId: string, price: string, size: string, ... }
-    return { result: 'modified', orderId: dto.orderId };
+    return { orderId: dto.orderId };
   }
 
   @Get('orderInfo')

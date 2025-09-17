@@ -15,7 +15,7 @@ export class LoginService {
     if (dto.email && dto.password) {
       return {
         code: 0,
-        message: 'Verification email sent. Please check your inbox.',
+        message: 'Success',
         data: {
           userId: randomUserId
         }
@@ -76,8 +76,7 @@ export class LoginService {
         code: 0,
         message: 'Verification SMS sent. Please check your phone.',
         data: {
-          userId: randomUserId,
-          phone: randomPhone
+          userId: randomUserId
         }
       };
     } else {
@@ -90,13 +89,14 @@ export class LoginService {
 
   verifyPhone(dto: LoginPhoneVerifyDto): CommonResponseDto | ErrorResponseDto {
     if (dto.phone === '+1234567890' && dto.otp === '482193') {
+      const randomToken = () => Math.random().toString(36).substring(2, 18);
       return {
         code: 0,
         message: 'Verification email sent. Please check your inbox.',
         data: {
-          isRequire2fa: true,
-          accessToken: 'string',
-          refreshToken: 'string'
+          isRequire2fa: Math.random() > 0.5,   
+          accessToken: randomToken(),
+          refreshToken: randomToken()
         }
       };
     } else {
@@ -115,12 +115,13 @@ export class LoginService {
   }
 
   passkeyVerify(): { code: number; message: string; data: { accessToken: string; refreshToken: string } } {
+    const randomToken = () => Math.random().toString(36).substring(2, 18);
     return {
       code: 0,
       message: 'Success',
       data: {
-        accessToken: 'string',
-        refreshToken: 'string'
+        accessToken: randomToken(),
+        refreshToken: randomToken()
       }
     };
   }
@@ -133,12 +134,13 @@ export class LoginService {
   }
 
   telegramVerify(): { code: number; message: string; data: { accessToken: string; refreshToken: string } } {
+    const randomToken = () => Math.random().toString(36).substring(2, 18);
     return {
       code: 0,
       message: 'Success',
       data: {
-        accessToken: 'string',
-        refreshToken: 'string'
+        accessToken: randomToken(),
+        refreshToken: randomToken()
       }
     };
   }
@@ -151,12 +153,13 @@ export class LoginService {
   }
 
   metamaskVerify(): { code: number; message: string; data: { accessToken: string; refreshToken: string } } {
+    const randomToken = () => Math.random().toString(36).substring(2, 18);
     return {
       code: 0,
       message: 'Success',
       data: {
-        accessToken: 'string',
-        refreshToken: 'string'
+        accessToken: randomToken(),
+        refreshToken: randomToken()
       }
     };
   }

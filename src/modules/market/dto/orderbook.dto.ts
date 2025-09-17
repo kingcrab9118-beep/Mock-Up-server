@@ -5,6 +5,6 @@ export class OrderBookItemDto {
 
 export class OrderBookDto {
   symbol: string;
-  bids: Array<{ price: string; size: string }>;
-  asks: Array<{ price: string; size: string }>;
+  bids: Array<{ price: string; quality: string }>;
+  asks: Array<{ price: string; quality: string }>;
 }

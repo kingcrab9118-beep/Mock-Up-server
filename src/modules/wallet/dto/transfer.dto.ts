@@ -6,8 +6,10 @@ export class TransferRequestDto {
 }
 
 export class TransferResponseDto {
-  fromWalletBalance: number;
-  toWalletBalance: number;
+  data: {
+    fromWalletBalance: number;
+    toWalletBalance: number;
+  }
   code: number;
   message: string;
 }

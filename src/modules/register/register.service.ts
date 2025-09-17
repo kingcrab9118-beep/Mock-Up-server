@@ -4,6 +4,7 @@ import { RegisterEmailDto } from './dto/register-email.dto';
 import { VerifyEmailDto } from './dto/register-email-verify.dto';
 import { RegisterPhoneDto } from './dto/register-phone.dto';
 import { VerifyPhoneDto } from './dto/register-phone-verify.dto';
+import { da } from '@faker-js/faker';
 
 @Injectable()
 export class RegisterService {
@@ -16,14 +17,14 @@ export class RegisterService {
     }
     return {
       code: 0,
-      message: 'Verification email sent. Please check your inbox.',
+      message: 'Success',
       data: { userId: 'mock-user-id-123' },
     };
   }
 
   verifyEmail(dto: VerifyEmailDto) {
     if (dto.verificationCode === '123456') {
-      return { code: 0, message: 'Verification email sent. Please check your inbox.' };
+      return { code: 0, message: 'Success' };
     } else {
       return { code: 'INVALID_INPUT', message: 'Error Message' };
     }
@@ -38,13 +39,14 @@ export class RegisterService {
     }
     return {
       code: 0,
-      message: 'Verification email sent. Please check your inbox.',
+      message: 'Success',
+      data: { userId: 'mock-user-id-456' },
     };
   }
 
   verifyPhone(dto: VerifyPhoneDto) {
     if (dto.otp === '482193') {
-      return { code: 0, message: 'Verification email sent. Please check your inbox.' };
+      return { code: 0, message: 'Success', data: { userId: 'mock-user-id-456' } };
     }
     return { code: 'INVALID_INPUT', message: 'Invalid or expired OTP' };
   }

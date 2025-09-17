@@ -22,10 +22,24 @@ export class SpotController {
     return this.spotService.modifyOrder(dto);
   }
   
-  @Get('order/info')
-  getOrderInfo(@Query('orderId') orderId: string) {
-    return this.spotService.getOrderInfo(orderId);
+
+  @Get('spot/klines')
+  getSpotKlines() {
+    // Return the specified mock format
+    return [
+      {
+        openTime: new Date().toISOString(),
+        open: 'string',
+        high: 'string',
+        low: 'string',
+        close: 'string',
+        volume: 'string',
+        closeTime: new Date().toISOString(),
+      },
+    ];
   }
+
+  // ...existing code...
 
     // /spot/orders
   @Get('orders')

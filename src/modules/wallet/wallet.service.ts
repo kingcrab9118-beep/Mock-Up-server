@@ -46,7 +46,7 @@ export class WalletService {
     const randHex = () => '0x' + Array.from({length: 16}, () => Math.floor(Math.random() * 16).toString(16)).join('');
     const randTx = () => 'tx' + Math.floor(Math.random() * 100000);
     return {
-      code: true,
+      code: 0,
       message: 'Deposit histories',
       data: {
         recentDeposits: [
@@ -70,17 +70,17 @@ export class WalletService {
   withdraw(dto: WithdrawRequestDto): WithdrawResponseDto {
     const randId = () => 'withdraw-' + Math.floor(Math.random() * 10000);
     return {
-      withdrawId: randId(),
-      balance: parseFloat((Math.random() * 10000).toFixed(2)),
-      status: 'pending',
-      code: '0',
+      data: {
+        withdrawId: randId(),
+        balance: parseFloat((Math.random() * 10000).toFixed(2)),
+      },
+      code: 0,
       message: 'Withdrawal request result'
     };
   }
 
   verifyWithdraw(dto: WithdrawVerifyRequestDto): WithdrawVerifyResponseDto {
     return {
-      status: 'verified',
       code: '0',
       message: 'Withdrawal 2FA verification result'
     };
@@ -92,29 +92,32 @@ export class WalletService {
     return {
       code: 0,
       message: 'Withdrawal histories',
-      balance: parseFloat((Math.random() * 10000).toFixed(2)),
-      recentWithdrawals: [
-        {
-          id: 'with-' + Math.floor(Math.random() * 1000),
-          amount: parseFloat((Math.random() * 1000).toFixed(2)),
-          currency: 'USDT',
-          status: 'completed',
-          address: randHex(),
-          network: 'ERC20',
-          txHash: randTx(),
-          fee: parseFloat((Math.random() * 2).toFixed(2)),
-          createdAt: new Date().toISOString(),
-          completedAt: new Date().toISOString(),
-          cancelledAt: null
-        }
-      ]
+      data: {
+        recentWithdrawals: [
+          {
+            id: 'with-' + Math.floor(Math.random() * 1000),
+            amount: parseFloat((Math.random() * 1000).toFixed(2)),
+            currency: 'USDT',
+            status: 'completed',
+            address: randHex(),
+            network: 'ERC20',
+            txHash: randTx(),
+            fee: parseFloat((Math.random() * 2).toFixed(2)),
+            createdAt: new Date().toISOString(),
+            completedAt: new Date().toISOString(),
+            cancelledAt: new Date().toISOString()
+          }
+        ]
+      }
     };
   }
 
   transfer(dto: TransferRequestDto): TransferResponseDto {
     return {
-      fromWalletBalance: parseFloat((Math.random() * 10000).toFixed(2)),
-      toWalletBalance: parseFloat((Math.random() * 10000).toFixed(2)),
+      data: {
+        fromWalletBalance: parseFloat((Math.random() * 10000).toFixed(2)),
+        toWalletBalance: parseFloat((Math.random() * 10000).toFixed(2)),
+      },
       code: 0,
       message: 'Transfer result'
     };

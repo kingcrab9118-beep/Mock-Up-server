@@ -7,9 +7,10 @@ export class WithdrawRequestDto {
 }
 
 export class WithdrawResponseDto {
+  data: {
   withdrawId: string;
   balance: number;
-  status: 'pending' | 'completed' | 'failed';
-  code: string;
+  }
+  code: number;
   message: string;
 }

@@ -74,7 +74,6 @@ export class SpotService {
 
   // /public/spot/klines
   getSpotKlines(query: any) {
-    // mock kline data
     return [
       {
         openTime: new Date().toISOString(),
@@ -90,50 +89,21 @@ export class SpotService {
 
   placeOrder(dto: SpotOrderRequestDto): OrderResponseDto {
     const randomDigits = (len: number) => Array.from({length: len}, () => Math.floor(Math.random() * 10)).join('');
-    const rand = () => (Math.random() * 1000 + 27000).toFixed(2);
-    const randSize = () => (Math.random() * 2).toFixed(4);
     return {
-      symbol: dto.symbol,
       orderId: 'order-' + randomDigits(5),
-      price: dto.price || rand(),
-      size: dto.size || randSize(),
-      orderType: dto.orderType,
-      side: dto.side,
-      status: 'open',
-      priceAvg: rand(),
-      baseVolume: randSize(),
-      quoteVolume: rand(),
-      feeCurrency: 'USDT',
-      fee: (Math.random() * 0.2).toFixed(4),
-      cTime: new Date().toISOString(),
-      uTime: new Date().toISOString()
     };
   }
 
-  cancelOrder(dto: CancelOrderRequestDto): { result: string } {
+  cancelOrder(dto: SpotOrderRequestDto): OrderResponseDto {
+    const randomDigits = (len: number) => Array.from({length: len}, () => Math.floor(Math.random() * 10)).join('');
     return {
-      result: 'cancelled'
+      orderId: 'order-' + randomDigits(5),
     };
   }
 
   modifyOrder(dto: ModifyOrderRequestDto): OrderResponseDto {
-    const rand = () => (Math.random() * 1000 + 27000).toFixed(2);
-    const randSize = () => (Math.random() * 2).toFixed(4);
     return {
-      symbol: dto.symbol,
       orderId: dto.orderId,
-      price: dto.price || rand(),
-      size: dto.size || randSize(),
-      orderType: dto.orderType,
-      side: dto.side,
-      status: 'open',
-      priceAvg: rand(),
-      baseVolume: randSize(),
-      quoteVolume: rand(),
-      feeCurrency: 'USDT',
-      fee: (Math.random() * 0.2).toFixed(4),
-      cTime: new Date().toISOString(),
-      uTime: new Date().toISOString()
     };
   }
 

@@ -37,35 +37,37 @@ export class AccountService {
   }
 
   getChangePasswordCode(dto: ChangePasswordCodeDto): CommonResponseDto | ErrorResponseDto {
-    return { code: 0, message: 'Change password code sent.' };
+    return { code: 0, message: 'Success.', data: {} };
   }
 
   verifyChangePassword(dto: ChangePasswordVerifyDto): { code: number; message: string; data: { changePasswordToken: string } } | ErrorResponseDto {
-    if (dto.code === 'valid') {
-      return { code: 0, message: 'Success', data: { changePasswordToken: 'token' } };
+    const randomToken = () => Math.random().toString(36).substring(2, 18);
+    if (dto.code !== null) {
+      return { code: 0, message: 'Success', data: { changePasswordToken: randomToken() } };
     } else {
       return { code: 'INVALID_INPUT', message: 'Error Message' };
     }
   }
 
   confirmChangePassword(dto: ChangePasswordConfirmDto): CommonResponseDto | ErrorResponseDto {
-    return { code: 0, message: 'Password changed successfully.' };
+    return { code: 0, message: 'Success.', data: {} };
   }
 
   getForgetPasswordCode(dto: ForgetPasswordGetCodeDto): CommonResponseDto | ErrorResponseDto {
-    return { code: 0, message: 'Forget password code sent.' };
+    return { code: 0, message: 'Success.' , data: {}};
   }
 
   verifyForgetPassword(dto: ForgetPasswordVerifyDto): { code: number; message: string; data: { changePasswordToken: string } } | ErrorResponseDto {
-    if (dto.token === 'valid') {
-      return { code: 0, message: 'Success', data: { changePasswordToken: 'token' } };
+    const randomToken = () => Math.random().toString(36).substring(2, 18);
+    if (dto.token !== null) {
+      return { code: 0, message: 'Success', data: { changePasswordToken: randomToken() } };
     } else {
       return { code: 'INVALID_INPUT', message: 'Error Message' };
     }
   }
 
   confirmForgetPassword(dto: ForgetPasswordConfirmDto): CommonResponseDto | ErrorResponseDto {
-    return { code: 0, message: 'Password reset successfully.' };
+    return { code: 0, message: 'Success', data: {} };
   }
 
   getProfile(): { code: number; message: string; data: any } | ErrorResponseDto {
@@ -92,7 +94,7 @@ export class AccountService {
   }
 
   updateUsername(dto: UpdateUsernameDto): CommonResponseDto | ErrorResponseDto {
-    return { code: 0, message: 'Username updated.' };
+    return { code: 0, message: 'Success', data : {} };
   }
 
   refreshToken(dto: TokenRefreshDto): { code: number; message: string; data: { refreshToken: string } } {
@@ -100,10 +102,10 @@ export class AccountService {
   }
 
   logout(): CommonResponseDto | ErrorResponseDto {
-    return { code: 0, message: 'User logged out successfully.' };
+    return { code: 0, message: 'Success', data: {} };
   }
 
   deactivateAccount(dto: DeactivateAccountDto): CommonResponseDto | ErrorResponseDto {
-    return { code: 0, message: 'Account deactivated.' };
+    return { code: 0, message: 'Success', data:{} };
   }
 }

@@ -4,7 +4,6 @@ export class WithdrawVerifyRequestDto {
 }
 
 export class WithdrawVerifyResponseDto {
-  status: 'verified' | 'failed';
   code: string;
   message: string;
 }

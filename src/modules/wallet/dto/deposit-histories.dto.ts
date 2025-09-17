@@ -18,7 +18,7 @@ export class DepositHistoryItemDto {
 }
 
 export class DeposithistoriesResponseDto {
-  code: boolean;
+  code: number;
   message: string;
   data: {
     recentDeposits: DepositHistoryItemDto[];

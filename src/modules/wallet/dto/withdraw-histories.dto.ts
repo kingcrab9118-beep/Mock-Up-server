@@ -21,6 +21,7 @@ export class WithdrawHistoryItemDto {
 export class WithdrawhistoriesResponseDto {
   code: number;
   message: string;
-  balance: number;
-  recentWithdrawals: WithdrawHistoryItemDto[];
+  data: {
+    recentWithdrawals: WithdrawHistoryItemDto[];
+  }
 }
