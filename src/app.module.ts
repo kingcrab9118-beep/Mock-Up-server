@@ -10,9 +10,10 @@ import { MarketModule } from './modules/market/market.module';
 import { SpotModule } from './modules/spot/spot.module';
 import { FuturesModule } from './modules/futures/futures.module';
 import { ImagePuzzleModule } from './modules/image-puzzle/image-puzzle.module';
+import { WsMockModule } from './modules/websocket/websocket.module';
 
 @Module({
-  imports: [RegisterModule, LoginModule, AccountModule, WalletModule, MarketModule, SpotModule, FuturesModule, ImagePuzzleModule],
+  imports: [RegisterModule, LoginModule, AccountModule, WalletModule, MarketModule, SpotModule, FuturesModule, ImagePuzzleModule, WsMockModule],
   controllers: [AppController],
   providers: [AppService],
 })
