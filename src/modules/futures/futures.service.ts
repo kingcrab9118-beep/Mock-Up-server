@@ -8,20 +8,23 @@ import { FuturePositionHistoryInfoResponseDto } from './dto/future-position-hist
 @Injectable()
 export class FuturesService {
   getSymbols(): FutureSymbolInfoDto[] {
+    // Return a mock symbol with random values
+    const rand = () => (Math.random() * 1000 + 27000).toFixed(2);
+    const randInt = (min: number, max: number) => Math.floor(Math.random() * (max - min + 1)) + min;
     return [
       {
-        symbol: 'BTCUSDT',
-        baseCurrency: 'BTC',
+        symbol: Math.random() > 0.5 ? 'BTCUSDT' : 'ETHUSDT',
+        baseCurrency: Math.random() > 0.5 ? 'BTC' : 'ETH',
         quoteCurrency: 'USDT',
-        maxLeverage: '20',
-        minOrderSize: '0.001',
-        maxOrderSize: '100',
-        pricePrecision: '2',
-        sizePrecision: '4',
-        status: 'active',
-        quoteVolume: '1000',
-        high: '28000',
-        low: '27000'
+        maxLeverage: randInt(1, 50).toString(),
+        minOrderSize: (Math.random() * 0.01).toFixed(4),
+        maxOrderSize: (Math.random() * 100 + 1).toFixed(3),
+        pricePrecision: randInt(1, 4).toString(),
+        sizePrecision: randInt(1, 6).toString(),
+        status: Math.random() > 0.5 ? 'active' : 'inactive',
+        quoteVolume: rand(),
+        high: rand(),
+        low: rand()
       }
     ];
   }
