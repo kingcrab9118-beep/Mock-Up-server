@@ -25,9 +25,10 @@ async function bootstrap() {
     .addTag('WebSocket')
     .build();
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, document);
+  SwaggerModule.setup('doc', app, document);
   app.useGlobalPipes(new ValidationPipe());
   app.useWebSocketAdapter(new WsAdapter(app));
-  await app.listen(3000, '0.0.0.0');
+  app.setGlobalPrefix('api');
+  await app.listen(5000, '0.0.0.0');
 }
 bootstrap();
